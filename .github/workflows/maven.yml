@@ -24,8 +24,18 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
-  
-   
+    - name: Archive JUnit Test Results
+      uses: actions/upload-artifact@v2
+      with:
+        name: junit-reports
+        path: target/surefire-reports
+
+    - name: Publish JUnit Test Report
+      uses: actions/upload-artifact@v2
+      with:
+        name: junit-reports
+        path: target/surefire-reports
+
   publish-job:
     runs-on: ubuntu-latest
     needs: build_test
